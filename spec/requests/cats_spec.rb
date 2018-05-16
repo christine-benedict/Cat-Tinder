@@ -83,4 +83,20 @@ describe "Cats API" do
     expect(json['enjoys']).to include "can't be blank"
   end
 
+  it "enjoys text only if it has 10 characters" do
+    cat_params = {
+      cat: {
+        name: "George",
+        age: 4,
+        enjoys: "Yarn"
+      }
+    }
+    post '/cats', params: cat_params
+    expect(response.status).to eq 422
+    json = JSON.parse(response.body)
+
+    expect(json['enjoys']).to contain_exactly("is too short (minimum is 10 characters)")
+  end
+
+
 end
