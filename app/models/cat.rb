@@ -1,4 +1,4 @@
 class Cat < ApplicationRecord
   #Here is the new line of code
-  validates :name, presence: true
+  validates :name, :age, :enjoys, presence: true
 end
